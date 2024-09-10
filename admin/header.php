@@ -1,6 +1,18 @@
 <?php
 session_start();
-// Add any necessary authentication checks here
+
+// Check if admin is logged in, if not, redirect to login page
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
+}
+
+// Logout functionality
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('Location: login.php');
+    exit;
+}
 
 // Database connection
 $conn = new mysqli('localhost', 'root', '', 'visa');
@@ -29,6 +41,7 @@ function sanitize($input) {
                 <a class="nav-link" href="users.php">Users</a>
                 <a class="nav-link" href="documents.php">Documents</a>
                 <a class="nav-link" href="progress.php">Progress</a>
+                <a class="nav-link" href="?logout">Logout</a>
             </div>
         </div>
     </nav>

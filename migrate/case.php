@@ -49,18 +49,15 @@ if (isset($_SESSION['user_id'])) {
     </script>";
 }
 
-?>
-
-
-<?php
-
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id']; 
+ 
+if  (isset($_SESSION['user_id'])) {
+    $user_ids = $_SESSION['user_id'];
+    
 
     // Prepare a SQL query to select all user data based on the user ID
     $sql = "SELECT * FROM progress WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_id); // Bind the user ID to the query
+    $stmt->bind_param('i', $user_ids); // Bind the user ID to the query
     $stmt->execute();
     
     // Fetch the result
