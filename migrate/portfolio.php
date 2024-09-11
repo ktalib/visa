@@ -1,9 +1,8 @@
 <?php
 // Include your database connection
-include '../db_connection.php'; 
+include '../db_connection.php';
 
 session_start();
- 
 
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id']; // Get the logged-in user's ID from session
@@ -20,9 +19,30 @@ if (isset($_SESSION['user_id'])) {
     if ($result->num_rows > 0) {
         // Fetch user data as an associative array
         $user_data = $result->fetch_assoc();
+
+        // Safely check and display user data with null checks
+        $first_name = isset($user_data['first_name']) ? $user_data['first_name'] : 'N/A';
+        $last_name = isset($user_data['last_name']) ? $user_data['last_name'] : 'N/A';
+        $title = isset($user_data['title']) ? $user_data['title'] : 'N/A';
+        $gender = isset($user_data['gender']) ? $user_data['gender'] : 'N/A';
+        $age = isset($user_data['age']) ? $user_data['age'] : 'N/A';
+        $status = isset($user_data['status']) ? $user_data['status'] : 'N/A';
+        $country = isset($user_data['country']) ? $user_data['country'] : 'N/A';
+        $citizenship = isset($user_data['citizenship']) ? $user_data['citizenship'] : 'N/A';
+        $state = isset($user_data['state']) ? $user_data['state'] : 'N/A';
+        $zipcode = isset($user_data['zipcode']) ? $user_data['zipcode'] : 'N/A';
+        $destination = isset($user_data['destination']) ? $user_data['destination'] : 'N/A';
+        $children = isset($user_data['children']) ? $user_data['children'] : 'N/A';
+        $language = isset($user_data['language']) ? $user_data['language'] : 'N/A';
+        $education_training = isset($user_data['education_training']) ? $user_data['education_training'] : 'N/A';
+        $work_history = isset($user_data['work_history']) ? $user_data['work_history'] : 'N/A';
+        $entry_profile = isset($user_data['entry_profile']) ? $user_data['entry_profile'] : 'N/A';
+        $job_offer = isset($user_data['job_offer']) ? $user_data['job_offer'] : 'N/A';
+        $family_or_friends_in_canada = isset($user_data['family_or_friends_in_canada']) ? $user_data['family_or_friends_in_canada'] : 'N/A';
+        $graduate = isset($user_data['graduate']) ? $user_data['graduate'] : 'N/A';
+        $addition = isset($user_data['addition']) ? $user_data['addition'] : 'N/A';
+
         
-        // Display user data (Example)
-      
         // Add more fields as needed
         
     } else {
@@ -50,10 +70,9 @@ if (isset($_SESSION['user_id'])) {
     </script>";
 }
 
- 
+$conn->close();
 ?>
 
- 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -278,7 +297,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              First Name
            </label>
            
-          <input type="text" name="first_name" value="<?php echo $user_data['first_name']; ?>" maxlength="100" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_first_name">
+          <input type="text" name="first_name" value="<?php echo $first_name; ?>" maxlength="100" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_first_name">
            <p class="text-red text-xs italic">Please fill out this field.</p>
          </div>
          <div class="md:w-1/2 px-3">
@@ -286,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              Last Name
            </label>
            
-           <input type="text" name="last_name"  value="<?php echo $user_data['last_name']; ?>" maxlength="100" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_last_name">
+           <input type="text" name="last_name"  value="<?php echo $last_name; ?>" maxlength="100" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_last_name">
      
          </div>
      
@@ -298,8 +317,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            <select name="title" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_title">
        <option value="">---------</option>
       
-       <option value="<?php echo $user_data['title']; ?>"selected>
-        <?php echo $user_data['title']; ?></option> 
+       <option value="<?php echo $title; ?>"selected>
+        <?php echo $title; ?></option> 
        <option value="MR" selected>MR</option>
      
        <option value="MRS">MRS</option>
@@ -327,7 +346,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            <select name="gender" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_gender">
        <option value="">---------</option>
      
-       <option value="<?php echo $user_data['gender']; ?>"  selected><?php echo $user_data['gender']; ?></option>
+       <option value="<?php echo $gender; ?>"  selected><?php echo $gender; ?></option>
         <option value="1" selected>Male</option>
      
        <option value="2">Female</option>
@@ -343,7 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            <label class="block capitalize tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-password">
              Age
            </label>
-                <input type="number" name="age" value="<?php echo $user_data['age']; ?>" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_age">
+                <input type="number" name="age" value="<?php echo $age; ?>" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_age">
      
          </div>
          <div class="md:w-full px-3">
@@ -351,8 +370,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              Marital status
            </label>
                 <select name="status" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_status">
-       <option value="<?php echo $user_data['status']; ?>"
-       > <?php echo $user_data['status']; ?>
+       <option value="<?php echo $status; ?>"
+       > <?php echo $status; ?>
        </option>     
          <option value="">---------</option>
      
@@ -1398,7 +1417,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              State
            </label>
            <div class="">
-                 <input type="text" name="state" value="<?php echo $user_data['state']; ?>" maxlength="20" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_state">
+                 <input type="text" name="state" value="<?php echo $state; ?>" maxlength="20" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_state">
      
              <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
               
@@ -1409,7 +1428,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            <label class="block  tracking-wide text-grey-darker text-sm font-bold mb-2">
              Zip
            </label>
-                <input type="text" name="zipcode" value="<?php echo $user_data['zipcode']; ?>"
+                <input type="text" name="zipcode" value="<?php echo $zipcode; ?>"
                 maxlength="20" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_zipcode">
      
          </div>
@@ -1426,7 +1445,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            </label>
            
            <select name="destination" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_destination">
-       <option value="<?php echo $user_data['destination']; ?>"> <?php echo $user_data['destination']; ?></option>
+       <option value="<?php echo $destination; ?>"> <?php echo $destination; ?></option>
      
        <option value="NO PREFERENCE">NO PREFERENCE</option>
      
@@ -1467,8 +1486,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            </label>
            
            <select name="children" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_choice">
-       <option value="<?php echo $user_data['children']; ?>"
-       ><?php echo $user_data['children']; ?></option>
+       <option value="<?php echo $children; ?>"
+       ><?php echo $children; ?></option>
      
        <option value="YES" selected>YES</option>
      
@@ -1522,7 +1541,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            <label class="block capitalize tracking-wide my-4 text-grey-darker text-xs font-medium italic mb-2" for="grid-password">
              Have you done any paid work during the last 10 years? (optional)*  
            </label>
-                <input type="text" name="work_history"  value="<?php echo $user_data['work_history']; ?>" maxlength="250" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_work_history">
+                <input type="text" name="work_history"  value="<?php echo $work_history; ?>" maxlength="250" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_work_history">
      
          </div>
        </div>
@@ -1604,7 +1623,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              tells us a bit about yourself
            </label>
                 <textarea name="addition" cols="40" rows="10" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_addition">
-                 <?php echo $user_data['addition']; ?> 
+                 <?php echo $addition; ?> 
 
              </textarea>
      
