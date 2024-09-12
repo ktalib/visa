@@ -3,22 +3,19 @@ session_start();
 
 // Check if admin is logged in, if not, redirect to login page
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
 // Logout functionality
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: login.php');
+    header('Location: index.php');
     exit;
 }
 
 // Database connection
-$conn = new mysqli('localhost', 'root', '', 'visa');
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db.php';
 
 // Function to sanitize input
 function sanitize($input) {

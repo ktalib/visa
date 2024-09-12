@@ -1,13 +1,15 @@
 <?php
 session_start();
 $error = '';
+include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // In a real-world scenario, you'd want to use a database to store and verify credentials
     // This is a simplified example
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
- $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+
+    $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ? AND password = ?");
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -17,17 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($row['username'] === $username && $row['password'] === $password) {
             $_SESSION['admin_logged_in'] = true;
             header('Location: users.php');
-            
+            exit;
         }
-    }
-    else {
+    } else {
         $error = 'Invalid username or password';
     }
- 
-
-  
-
-     
 }
 ?>
 
@@ -51,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php if ($error): ?>
                             <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
                         <?php endif; ?>
-                        <form method="POST">
+                        <form method="POST" action="index.php">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username" required>

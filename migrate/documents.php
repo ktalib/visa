@@ -182,7 +182,7 @@ if (isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve form data
     $username = trim($_POST['username']);
-    $caption = trim($_POST['caption']);
+    
 
     // Handle file upload
     if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
@@ -206,14 +206,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }
-
+            $caption = trim($_POST['caption']);
             // Move the uploaded file to the server
             if (move_uploaded_file($fileTmpPath, $uploadFilePath)) {
                 // Prepare the SQL query to insert file details into the database
-                $sql = "INSERT INTO documents (user_id,username,file, caption) VALUES (?, ?,?, ?)";
+                $sql = "INSERT INTO documents (user_id,username, file, caption) VALUES (?, ?,?, ?)";
                 $stmt = $conn->prepare($sql);
                 $filePath = $uploadFilePath; // Path to the uploaded file
-                $stmt->bind_param('ssss', $user_id, $username, $caption, $filePath);
+                $stmt->bind_param('ssss', $user_id, $username,  $filePath,$caption);
 
                 if ($stmt->execute()) {
                     echo "<script>
@@ -296,11 +296,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>
       <div>
         <label for="document" class="block ml-4 text-slate-900 text-sm font-medium leading-6 capitalize">document type</label>
-          <input type="text" name="caption" maxlength="25" class="mt-3 px-4 py-2 w-full bg-slate-100 rounded-full focus:outline-violet-500 text-sm leading-6 text-slate-900 border border-gray-300" required="" id="id_caption">     
+          <input type="text" name="caption"  class="mt-3 px-4 py-2 w-full bg-slate-100 rounded-full focus:outline-violet-500 text-sm leading-6 text-slate-900 border border-gray-300" required="" id="id_caption">     
       </div>
       <div class="flex items-center">
         <img src="https://ryanimmigrationservices.ca/static/img/doc.png" alt="Avatar" class="w-12 h-12 mt-2 ">
-             <input type="file" name="file" accept="image/*" class="ml-4 p-1 w-full mt-6 text-slate-500 text-sm rounded-full leading-6 file:bg-violet-200 file:text-violet-700 file:font-semibold file:border-none file:px-4 file:py-1 file:mr-6 file:rounded-full hover:file:bg-violet-100 border border-gray-300" required="" id="id_image">
+             <input type="file" name="file"   class="ml-4 p-1 w-full mt-6 text-slate-500 text-sm rounded-full leading-6 file:bg-violet-200 file:text-violet-700 file:font-semibold file:border-none file:px-4 file:py-1 file:mr-6 file:rounded-full hover:file:bg-violet-100 border border-gray-300" required="" id="id_image">
 
       </div>
       <div>

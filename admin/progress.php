@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo "<td>" . sanitize($row['user_id']) . " (" . sanitize($row['username']) . ")</td>";
             echo "<td>" . sanitize($row['name']) . "</td>";
             echo "<td>" . sanitize($row['percent']) . "</td>";
-            echo "<td><button class='btn btn-sm btn-primary' onclick='editProgress(" . json_encode($row) . ")'>Edit</button></td>";
+            echo "<td><button class='btn btn-sm btn-primary' onclick='editProgress(" . json_encode($row) . ")'>Update</button></td>";
             echo "</tr>";
         }
         ?>

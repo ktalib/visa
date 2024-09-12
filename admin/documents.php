@@ -19,7 +19,7 @@
             echo "<td>" . sanitize($row['id']) . "</td>";
             echo "<td>" . sanitize($row['user_id']) . "</td>";
             echo "<td>" . sanitize($row['username']) . "</td>";
-            echo "<td>" . sanitize($row['file']) . "</td>";
+            echo "<td><a href='../migrate/" . sanitize($row['file']) . "'>" . 'Download file'. "</a> </td>";
             echo "<td>" . sanitize($row['caption']) . "</td>";
             echo "</tr>";
         }
