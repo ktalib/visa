@@ -5,19 +5,29 @@ $error = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // In a real-world scenario, you'd want to use a database to store and verify credentials
     // This is a simplified example
-    $valid_username = 'admin';
-    $valid_password = 'password123'; // In production, use hashed passwords
-
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
+ $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if ($username === $valid_username && $password === $valid_password) {
-        $_SESSION['admin_logged_in'] = true;
-        header('Location: users.php');
-        exit;
-    } else {
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($row['username'] === $username && $row['password'] === $password) {
+            $_SESSION['admin_logged_in'] = true;
+            header('Location: users.php');
+            
+        }
+    }
+    else {
         $error = 'Invalid username or password';
     }
+ 
+
+  
+
+     
 }
 ?>
 

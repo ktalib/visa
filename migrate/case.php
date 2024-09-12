@@ -51,21 +51,20 @@ if (isset($_SESSION['user_id'])) {
 
  
 if  (isset($_SESSION['user_id'])) {
-    $user_ids = $_SESSION['user_id'];
     
+  $user_id = $_SESSION['user_id'];
 
     // Prepare a SQL query to select all user data based on the user ID
     $sql = "SELECT * FROM progress WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('i', $user_ids); // Bind the user ID to the query
+    $stmt->bind_param('i', $user_id); // Bind the user ID to the query
     $stmt->execute();
     
     // Fetch the result
     $result = $stmt->get_result();
     
     if ($result->num_rows > 0) {
-        // Fetch user data as an associative array
-        $user_progress = $result->fetch_assoc();
+         
         
   
         
@@ -120,29 +119,12 @@ if  (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" type="text/css" rel="noopener" target="_blank" href="static/css/style.html">
     <script src="../static/js/index.html"></script>
     <link href="../../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="../../cdn.jsdelivr.net/npm/chart.js"></script>
 
     
     <style>
-        .progress-bar-container {
-    width: 100%;
-    background-color: #e0e0e0; /* Light grey background */
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 25px; /* Height of the progress bar */
-    background-color: #4caf50; /* Green color */
-    width: 0; /* Default width, will be set by percentage */
-    transition: width 0.3s ease-in-out; /* Smooth transition */
-}
-
-/* Use attribute selector to adjust width based on class */
-.progress-bar[data-progress] {
-    width: attr(data-progress)%;
-}
+     
 
         </style>
     <title>
@@ -254,24 +236,52 @@ if  (isset($_SESSION['user_id'])) {
 					<span class="text-sm font-bold tracki uppercase dark:text-gray-400"></span>
 				</div>
 			</div>
-<?php
-			
-            foreach ($user_progress as $progress) {
-           // Display a progress bar for the user's progress
-echo '<div class="progress-bar-container">';
-echo '<div class="progress-bar ' . $user_progress['percent'] . '">' . $user_progress['name'] .'</div>';
-echo '</div>';
-        }
-			
-		?>
-		
-		</div>
-	</div>
+
+</div>
+ 
+  
+ 
+               
+<div  >
+ <div class="mt-12 grid place-items-center">
+   <div class="w-full px-12 max-w-md mx-auto">
+
+  
+ 
+
+   <div class="row">
+  <div class="col-8">
+  <?php
+$user_progress = $result->fetch_all(MYSQLI_ASSOC);
+
+if (!empty($user_progress)) {
+    foreach ($user_progress as $progress) {
+        // Bootstrap progress bar
+       
+        echo '<p>Comment: ' . $progress['name'] . '</p>';
+        echo '<div class="progress mb-8">'; // Bootstrap class for margin bottom
+        echo '<div class="progress-bar bg-success" role="progressbar" style="width: ' . $progress['percent'] . '%; " aria-valuenow="' . $progress['percent'] . '" aria-valuemin="0" aria-valuemax="100">';
+        echo $progress['percent'] . '%'; // Show name and percentage
+        echo '</div>';
+        echo '</div>';
+    }
+}
+else {
+    echo 'No Case  found.';
+}
+?>
+
+</div>
+</div> 
+
+ 
+  </div>
+  </div>
+  </div>
+ 
 </section>
-             
-            
-         
-         </div>
+
+  </div>
              <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
              <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" integrity="sha512-Eak/29OTpb36LLo2r47IpVzPBLXnAMPAVypbSZiZ4Qkf8p/7S/XRG5xp7OKWPPYfJT6metI+IORkR5G8F900+g==" crossorigin="anonymous" referrerpolicy="no-referrer">
              </script>
