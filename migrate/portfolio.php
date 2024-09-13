@@ -262,6 +262,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 text: 'Your portfolio has been successfully updated.',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#3085d6'
+    }).then(function() {
+        window.location = 'profile.php';
+     
             });
         </script>";
     } else {
@@ -272,6 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 text: 'There was an error updating your portfolio.',
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#3085d6'
+    
             });
         </script>";
     }
@@ -315,11 +319,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            </label>
            
            <select name="title" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_title">
-       <option value="">---------</option>
+        
       
-       <option value="<?php echo $title; ?>"selected>
+       <option value="<?php echo $title; ?>">
         <?php echo $title; ?></option> 
-       <option value="MR" selected>MR</option>
+       <option value="MR" >MR</option>
      
        <option value="MRS">MRS</option>
      
@@ -344,12 +348,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
            </label>
            
            <select name="gender" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_gender">
-       <option value="">---------</option>
+      
      
-       <option value="<?php echo $gender; ?>"  selected><?php echo $gender; ?></option>
-        <option value="1" selected>Male</option>
+       <option value="<?php echo $gender; ?>"  ><?php echo $gender; ?></option>
+        <option value="Male" >Male</option>
      
-       <option value="2">Female</option>
+       <option value="Female">Female</option>
      
      </select>
      
@@ -373,13 +377,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        <option value="<?php echo $status; ?>"
        > <?php echo $status; ?>
        </option>     
-         <option value="">---------</option>
+          
      
        <option value="MARRIED">MARRIED</option>
      
        <option value="SINGLE">SINGLE</option>
      
-       <option value="COUPLE" selected>COUPLE</option>
+       <option value="COUPLE" >COUPLE</option>
      
        <option value="HAVE NO IDEA">HAVE NO IDEA</option>
      
@@ -400,7 +404,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              Country of residence
            </label>
            <select name="country" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_country">
-       <option value="">(Select Country)</option>
+       <option value="<?php echo $country; ?>"> <?php echo $country; ?></option>
      
        <option value="AF">Afghanistan</option>
      
@@ -876,7 +880,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
        <option value="US">United States of America</option>
      
-       <option value="UY" selected>Uruguay</option>
+       <option value="UY" >Uruguay</option>
      
        <option value="UZ">Uzbekistan</option>
      
@@ -909,7 +913,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              Country of citizenship
            </label>
            <select name="citizenship" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_country">
-       <option value="">(Select Country)</option>
+       <option value="<?php echo $citizenship; ?>"> <?php echo $citizenship; ?></option>
      
        <option value="AF">Afghanistan</option>
      
@@ -1385,7 +1389,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
        <option value="US">United States of America</option>
      
-       <option value="UY" selected>Uruguay</option>
+       <option value="UY" >Uruguay</option>
      
        <option value="UZ">Uzbekistan</option>
      
@@ -1455,7 +1459,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
        <option value="BRITISH COLOMBIA">BRITISH COLOMBIA</option>
      
-       <option value="MANITOBA" selected>MANITOBA</option>
+       <option value="MANITOBA" >MANITOBA</option>
      
        <option value="NEW BRUNSWICK">NEW BRUNSWICK</option>
      
@@ -1489,7 +1493,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
        <option value="<?php echo $children; ?>"
        ><?php echo $children; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
@@ -1504,9 +1508,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              select your preferred language
            </label>
          <select name="language" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_language">
-       <option value="">---------</option>
+       <option value="<?php echo $language; ?>"> <?php echo $language; ?></option>
      
-       <option value="ENGLISH" selected>ENGLISH</option>
+       <option value="ENGLISH" >ENGLISH</option>
      
        <option value="FRENCH">FRENCH</option>
      
@@ -1526,9 +1530,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                  Have you completed high school (secondary school)?*  
                </label>
                 <select name="education_training" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_education_training">
-       <option value="">---------</option>
+       <option value="<?php echo $education_training; ?>"> <?php echo $education_training; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
@@ -1554,9 +1558,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Have you already submitted an Express Entry profile to the Government of Canada within the past 12 months 
            </label>
                 <select name="entry_profile" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_entry_profile">
-       <option value="">---------</option>
+       <option value="<?php echo $entry_profile; ?>"> <?php echo $entry_profile; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
@@ -1570,9 +1574,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              Do you have a written job offer from a Canadian employer?   
            </label>
                 <select name="job_offer" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_job_offer">
-       <option value="">---------</option>
+       <option value="<?php echo $job_offer; ?>"> <?php echo $job_offer; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
@@ -1590,9 +1594,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       
            </label>
                 <select name="family_or_friends_in_canada" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_family_or_friends_in_canada">
-       <option value="">---------</option>
+       <option value="<?php echo $family_or_friends_in_canada; ?>"> <?php echo $family_or_friends_in_canada; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
@@ -1606,9 +1610,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
              please select accordingly
            </label>
                 <select name="graduate" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="id_graduate">
-       <option value="">---------</option>
+       <option value="<?php echo $graduate; ?>"> <?php echo $graduate; ?></option>
      
-       <option value="YES" selected>YES</option>
+       <option value="YES" >YES</option>
      
        <option value="NO">NO</option>
      
